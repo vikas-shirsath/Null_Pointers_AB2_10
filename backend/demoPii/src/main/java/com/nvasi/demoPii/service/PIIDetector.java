@@ -19,14 +19,14 @@ public class PIIDetector {
     public static Map<String, Object> detectPII(String text) {
         Map<String, Object> results = new HashMap<>();
 
-        detectAndAdd(text, PAN_REGEX, "pan", results);
-        detectAndAdd(text, AADHAAR_REGEX, "aadhaar", results);
-        detectAndAdd(text, EMAIL_REGEX, "email", results);
-        detectAndAdd(text, PHONE_REGEX, "phone", results);
-        detectAndAdd(text, NAME_REGEX, "name", results);
-        detectAndAdd(text, CREDIT_CARD_REGEX, "credit_card", results);
-        detectAndAdd(text, PASSPORT_REGEX, "passport", results);
-        detectAndAdd(text, DOB_REGEX, "dob", results);
+        detectAndAdd(text, "pan", PAN_REGEX, results);
+        detectAndAdd(text, "aadhaar", AADHAAR_REGEX, results);
+        detectAndAdd(text, "email", EMAIL_REGEX, results);
+        detectAndAdd(text, "phone", PHONE_REGEX, results);
+        detectAndAdd(text, "name", NAME_REGEX, results);
+        detectAndAdd(text, "credit_card", CREDIT_CARD_REGEX, results);
+        detectAndAdd(text, "passport", PASSPORT_REGEX, results);
+        detectAndAdd(text, "dob", DOB_REGEX, results);
 
         return results;
     }
