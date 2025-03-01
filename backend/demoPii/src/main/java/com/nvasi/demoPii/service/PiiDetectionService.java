@@ -25,21 +25,17 @@ import java.util.regex.Pattern;
 @Service
 public class PiiDetectionService {
 
-    // Initialize the logger
     private static final Logger logger = LoggerFactory.getLogger(PiiDetectionService.class);
 
-    // Method to extract text from a file
     public String extractText(MultipartFile file) throws IOException {
         String contentType = file.getContentType();
         String text = "";
         if (contentType.equals("application/pdf")) {
-            // Handle PDF files
             try (PDDocument document = PDDocument.load(file.getInputStream())) {
                 PDFTextStripper pdfTextStripper = new PDFTextStripper();
                 text = pdfTextStripper.getText(document);
             }
         } else if (contentType.equals("text/plain")) {
-            // Handle text files
             text = new String(file.getBytes());
         }  else {
             throw new UnsupportedOperationException("Unsupported file type: " + contentType);
@@ -76,10 +72,8 @@ public class PiiDetectionService {
 //        }
 //    }
 
-    // Method to validate the image file
     private boolean isValidImage(MultipartFile imageFile) {
         try {
-            // Read the image file
             BufferedImage image = ImageIO.read(new ByteArrayInputStream(imageFile.getBytes()));
             return image != null; // Return true if the image is valid
         } catch (IOException e) {

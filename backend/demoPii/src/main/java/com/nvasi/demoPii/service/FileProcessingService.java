@@ -31,13 +31,13 @@ public class FileProcessingService {
         String extractedText = "";
 
         if (contentType.equals("application/pdf") || contentType.equals("text/plain")) {
-            // Use PiiDetectionService for PDFs and text files
+            // Used PiiDetectionService for PDFs and text files
             extractedText = piiDetectionService.extractText(file);
         } else if (contentType.equals("image/jpeg") || contentType.equals("image/png")) {
-            // Use OCRService for images
+            // Used OCRService for images
             File tempFile = convertMultipartFileToFile(file);
             extractedText = ocrService.extractText(tempFile.getAbsolutePath());
-            tempFile.delete(); // Delete temp file after processing
+            tempFile.delete(); 
         } else {
             throw new UnsupportedOperationException("Unsupported file type: " + contentType);
         }
