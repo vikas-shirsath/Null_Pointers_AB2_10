@@ -1,4 +1,5 @@
 import React from "react";
+import PieChart from "./PieChart";
 
 const ScoreCard = ({ result }) => {
   const calculateScore = () => {
@@ -6,13 +7,27 @@ const ScoreCard = ({ result }) => {
     const detectedPii = Object.keys(result).filter(
       (key) => key.endsWith("_matches") && result[key].length > 0
     ).length;
-    return ((detectedPii / totalPii) * 100).toFixed(2);
+    return ((detectedPii / totalPii) * 100).toFixed(2); // Calculate the percentage
   };
 
   const score = calculateScore();
   const hasPii = Object.keys(result).some(
     (key) => key.endsWith("_matches") && result[key].length > 0
   );
+
+  // Format the results for better readability
+  const formatResult = (key, value) => {
+    switch (key) {
+      case "dob_matches":
+        return `DOB: ${value.join(", ")}`;
+      case "aadhaar_matches":
+        return `AADHAAR: ${value.join(", ")}`;
+      case "name_matches":
+        return `NAME: ${value.join(", ")}`;
+      default:
+        return `${key.replace("_matches", "").toUpperCase()}: ${value.join(", ")}`;
+    }
+  };
 
   return (
     <div
@@ -27,18 +42,21 @@ const ScoreCard = ({ result }) => {
     >
       {hasPii ? (
         <>
-          <h2 style={{ color: "#007bff", textAlign: "center" }}>PII Detection Score: {score}%</h2>
-          <div style={{ marginTop: "10px" }}>
+          <h2 style={{ color: "#007bff", textAlign: "center" }}>PII Detection Score</h2>
+          <div style={{ width: "300px", margin: "0 auto" }}>
+            <PieChart score={parseFloat(score)} />
+          </div>
+          <p style={{ textAlign: "center", color: "#007bff", marginTop: "10px" }}>
+            PII Detected: {score}%
+          </p>
+          <div style={{ marginTop: "20px" }}>
             {Object.keys(result).map(
               (key) =>
                 result[key].length > 0 && (
                   <div key={key} style={{ marginBottom: "10px" }}>
-                    <strong style={{ color: "#007bff" }}>{key.replace("_matches", "").toUpperCase()}:</strong>
-                    <ul style={{ listStyle: "none", paddingLeft: "0" }}>
-                      {result[key].map((match, index) => (
-                        <li key={index} style={{ marginBottom: "5px", color: "#ffffff" }}>{match}</li>
-                      ))}
-                    </ul>
+                    <strong style={{ color: "#007bff" }}>
+                      {formatResult(key, result[key])}
+                    </strong>
                   </div>
                 )
             )}

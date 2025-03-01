@@ -23,7 +23,7 @@ const FileUpload = ({ onFileUpload }) => {
 
       setError(null); // Clear any previous errors
       setFileName(file.name); // Set the file name
-      onFileUpload(file);
+      onFileUpload(file); // Call the onFileUpload function
     },
     [onFileUpload]
   );
