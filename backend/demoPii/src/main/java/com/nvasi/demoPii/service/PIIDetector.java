@@ -23,7 +23,6 @@ public class PIIDetector {
         detectAndAdd(text, "aadhaar", AADHAAR_REGEX, results);
         detectAndAdd(text, "email", EMAIL_REGEX, results);
         detectAndAdd(text, "phone", PHONE_REGEX, results);
-        detectAndAdd(text, "name", NAME_REGEX, results);
         detectAndAdd(text, "credit_card", CREDIT_CARD_REGEX, results);
         detectAndAdd(text, "passport", PASSPORT_REGEX, results);
         detectAndAdd(text, "dob", DOB_REGEX, results);
