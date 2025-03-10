@@ -16,9 +16,6 @@ Before you start, make sure you have the following tools installed on your syste
 [Maven](https://maven.apache.org/download.cgi) (for building the project)
 
 ## Step 1: Clone the Repository
-Clone the repository to your local machine:
-git clone https://github.com/yourusername/your-repo-name.git
-cd your-repo-name
 
 ## Step 2: Open the Project in IntelliJ IDEA
 Launch IntelliJ IDEA and select Open.
